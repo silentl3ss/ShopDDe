@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopdde/controllers/auth_controller.dart';
 import 'package:shopdde/views/screens/authentication_screens/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final AuthController _authController = AuthController();
+    late String email;
+    late String password;
     
 
   @override
@@ -63,6 +67,9 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextFormField(
+                      onChanged: (value) {
+                        email = value;
+                      },
                       validator: (value){
                         if(value!.isEmpty){
                           return 'enter your email';
@@ -112,6 +119,9 @@ class LoginScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextFormField(
+                      onChanged: (value){
+                        password = value;
+                      },
                       validator: (value){
                         if(value!.isEmpty){
                           return 'enter your password';
@@ -145,12 +155,10 @@ class LoginScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: (){
-                      if(_formKey.currentState!.validate()){
-                        print('pass');
-                      }else{
-                        print('failed');
-                      }
+                    onTap: () async{
+                      if(_formKey.currentState!.validate()) {
+                        await _authController.signInUsers(context: context, email: email, password: password);
+                      } else{}
                     },
                     child: Container(
                       width: 259,

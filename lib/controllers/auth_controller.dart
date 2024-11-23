@@ -14,7 +14,7 @@ class AuthController{
     required String password,
   })async{
     try{
-      User user = User(id: '', fullName: fullName, email: email, province: '', city: '', locality: '', password: password);
+      User user = User(id: '', fullName: fullName, email: email, province: '', city: '', locality: '', password: password, token: '');
         http.Response response = await  http.post(Uri.parse('$uri/api/signup'),
         body:user.toJson() ,//covert the user Object to Json for the request body
 
@@ -53,7 +53,9 @@ class AuthController{
 
       //handle the response using the managehttpresponse
 
-      manageHttpResponse(response: response, context: context, onSuccess: () {});
+      manageHttpResponse(response: response, context: context, onSuccess: () {
+        showSnackBar(context, 'Logged In');
+      });
 
     }catch (e) {
       print("Error: $e");
