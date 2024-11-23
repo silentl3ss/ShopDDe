@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shopdde/controllers/auth_controller.dart';
 import 'package:shopdde/views/screens/authentication_screens/login_screen.dart';
 
 class RegisterScreen extends StatelessWidget {
       final GlobalKey<FormState> _formKey = GlobalKey<FormState> ();
+      final AuthController _authController = AuthController();
+      late String email ;
+      late String fullName;
+      late String password;
+
 
 
   @override
@@ -63,6 +69,9 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextFormField(
+                      onChanged: (value){
+                        email = value;
+                      },
                       validator: (value){
                         if(value!.isEmpty){
                           return 'enter your email';
@@ -113,6 +122,9 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextFormField(
+                      onChanged: (value) {
+                        fullName = value;
+                      },
                       validator: (value){
                         if(value!.isEmpty){
                           return "enter your full name";
@@ -147,12 +159,7 @@ class RegisterScreen extends StatelessWidget {
               
               
               
-              
-              
-              
-              
-              
-              
+
               
               
                   const SizedBox(height: 20),
@@ -174,6 +181,9 @@ class RegisterScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     child: TextFormField(
+                      onChanged: (value) {
+                        password = value;
+                      },
                       validator: (value){
                         if(value!.isEmpty){
                           return "enter your password";
@@ -208,11 +218,9 @@ class RegisterScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 20),
                   InkWell(
-                    onTap: (){
-                      if(_formKey.currentState!.validate()){
-                        print('correct');
-                      }else{
-                        print('fail');
+                    onTap: ()async{
+                      if(_formKey.currentState!.validate()) {
+                       await _authController.signUpUsers(context: context, email: email, fullName: fullName, password: password);
                       }
                     },
                     child: Container(
