@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shopdde/views/screens/authentication_screens/login_screen.dart';
 import 'package:shopdde/views/screens/main_screen.dart';
+import 'package:shopdde/views/screens/nav_screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
