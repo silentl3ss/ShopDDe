@@ -15,11 +15,11 @@ class _MainScreenState extends State<MainScreen>{
   int _pageIndex = 0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
-    FavoriteScreen(),
-    CategoryScreen(),
-    StoresScreen(),
-    CartScreen(),
+    const HomeScreen(),
+    const FavoriteScreen(),
+    const CategoryScreen(),
+    const StoresScreen(),
+    const  CartScreen(),
     AccountScreen(),
   ];
 
